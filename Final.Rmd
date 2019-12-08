@@ -1,0 +1,18 @@
+---
+title: "Final Project"
+author: "Hartford Johnson"
+date: "11/30/2019"
+output: html_document
+---
+
+```{r}
+options(stringsAsFactors = F)
+install.packages("tidyverse")
+library("tidyverse")
+path <- "CSV"
+```
+
+```{r .R}
+source("FunctionStr.R")
+StreamDat.R("CSV")
+```
