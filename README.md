@@ -14,7 +14,7 @@ To begin, _________________________
 
 ### Prerequisites
 
-Run the following code to set stringsAsFactors to false, install and load the tidyverse (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+Within RStudio, run the following code to set stringsAsFactors to false, install and load the tidyverse (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 options(stringsAsFactors = F)
 install.packages("tidyverse")
