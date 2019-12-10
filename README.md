@@ -50,12 +50,59 @@ This command will run and edit each file individually, then export it to a newly
 ### Breaking it Down
 
 _____Explain each section of the function to list what it's used for._____
-```
-Give an example
-```
 
+The first part of the function _______
+```
+glob.path <- paste0(path, "/*", ".csv")
+dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
+datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
+timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
+GMTpat <- "\\d{2}.\\d{2}"
+Temppat <- "Temp\\.{3}[FC]"
+```
+The next part of the function _______
+```
+for (i in 1:length(dataFiles)){
+   DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
+   dataFiles[[i]]$Date <- str_extract(DTCol,datepat)
+   dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
+   GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
+```
+The next part of the function _______
+```
+timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
+names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol## Built With
+```
+The next part of the function _______
+```
+dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
+```
+The next part of the function _______
+```
+ tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
+ Fextrc <- str_extract(tempcolname, Temppat)
+ is_F <- substr(Fextrc, nchar(Fextrc),nchar(Fextrc))=="F"
+ if (is_F) {
+   dataFiles[[i]] <- dataFiles[[i]] %>% 
+     mutate(convert=(!!as.name(tempcolname) - 32) * 5/9 )
+   Cextrc <- str_replace(Fextrc,"F","C")
+   newcolname <- str_replace(tempcolname, Fextrc, Cextrc)
+   dataFiles[[i]] <- dataFiles[[i]][, !grepl("Temp", names(dataFiles[[i]]))]
+   names(dataFiles[[i]])[names(dataFiles[[i]])=="convert"] <- newcolname
+ }
+  dataFiles[[i]] <- dataFiles[[i]] %>% 
+    select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
+}
+```
+The next part of the function _______
+```
+dir.create("SpringData", showWarnings = F)
+  for (i in 1:length(dataFiles)){
+    write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
+  }
+}
+```
 ## Built With
-
 RStudio
 
 
