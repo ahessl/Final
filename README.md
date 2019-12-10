@@ -49,7 +49,7 @@ This command will run and edit each file individually, then export it to a newly
 
 ### Breaking it Down
 
-The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the _.csv_ files while also skipping over the unnecessary title. Patterns are assigned to names so that they may be called upon at a later time to edit the _Date.Time_ columns.
+The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the _.csv_ files while also skipping over the unnecessary title. Patterns are assigned to names so that they may be called upon at a later time to edit the 'Date.Time' columns.
 ```
 SpringDat.R <- function(path) {
    glob.path <- paste0(path, "/*", ".csv")
@@ -59,7 +59,7 @@ SpringDat.R <- function(path) {
    GMTpat <- "\\d{2}.\\d{2}"
    Temppat <- "Temp\\.{3}[FC]"
 ```
-The next part of the function utilizes some of the patterns that were previously created to separate the _Date.Time_ column into two separate columns.
+The next part of the function utilizes some of the patterns that were previously created to separate the 'Date.Time' column into two separate columns.
 ```
    for (i in 1:length(dataFiles)){
       DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
@@ -72,7 +72,7 @@ The next part of the function creates a new time column with the formatt of _Tim
       timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
       names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
 ```
-The next part of the function drops the original _Date.Time_ column, which is uneccessary to keep since separate columns were created for both _Date_ and _Time_.
+The next part of the function drops the original _Date.Time_ column, which is uneccessary to keep since separate columns were created for both 'Date' and 'Time'.
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
