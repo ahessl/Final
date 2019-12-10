@@ -45,6 +45,7 @@ run the code below that sources the function and applies it to all of the .csv f
 source("FunctionSpr.R")
 SpringDat.R("CSV")
 ```
+This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files will keep their original filenames.
 
 ### Breaking it Down
 
