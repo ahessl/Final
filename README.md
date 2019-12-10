@@ -49,9 +49,7 @@ This command will run and edit each file individually, then export it to a newly
 
 ### Breaking it Down
 
-_____Explain each section of the function to list what it's used for._____
-
-The first part of the function _______
+The first part of the function allows us to read the _.csv_ files while also skipping over the unnecessary title. Patterns are assigned to names so that they may be called upon at a later time to edit the _Date.Time_ columns.
 ```
 glob.path <- paste0(path, "/*", ".csv")
 dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
@@ -60,7 +58,7 @@ timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
 GMTpat <- "\\d{2}.\\d{2}"
 Temppat <- "Temp\\.{3}[FC]"
 ```
-The next part of the function _______
+The next part of the function utilizes some of the patterns that were previously created to separate the _Date.Time_ column into two separate columns.
 ```
 for (i in 1:length(dataFiles)){
    DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
@@ -68,16 +66,16 @@ for (i in 1:length(dataFiles)){
    dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
    GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
 ```
-The next part of the function _______
+The next part of the function creates a new time column with the formatt of _Time GMT-04:00_.
 ```
 timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
-names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol## Built With
+names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
 ```
-The next part of the function _______
+The next part of the function drops the original _Date.Time_ column, which is uneccessary to keep since separate columns were created for both _Date_ and _Time_.
 ```
 dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
-The next part of the function _______
+The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes _°F_, the temp values are converted to celcius and the column name is edited so that F is replaced by C.
 ```
  tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
  Fextrc <- str_extract(tempcolname, Temppat)
@@ -94,7 +92,7 @@ The next part of the function _______
     select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
 }
 ```
-The next part of the function _______
+The next part of the function creates a new folder named "SpringData", where outputs of each individual file will be sent.
 ```
 dir.create("SpringData", showWarnings = F)
   for (i in 1:length(dataFiles)){
@@ -102,7 +100,12 @@ dir.create("SpringData", showWarnings = F)
   }
 }
 ```
+Lastly, the very _first_ line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_.
+```
+SpringDat.R <- function(path) {
+```
 ## Built With
+
 RStudio
 
 
