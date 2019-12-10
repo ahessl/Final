@@ -49,16 +49,14 @@ This command will run and edit each file individually, then export it to a newly
 
 ### Breaking it Down
 
-_____Explain each section of the function to list what it's used for.________
+_____Explain each section of the function to list what it's used for._____
 ```
 Give an example
 ```
 
 ## Built With
 
-Dropwizard - The web framework used
-Maven - Dependency Management
-ROME - Used to generate RSS Feeds
+RStudio
 
 
 ## Authors
