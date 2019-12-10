@@ -36,8 +36,6 @@ until finished
 
 ## Running the Code
 
-Explain how to run the automated tests for this system
-
 To utilize the function that manipulates the files, we must first run the entire function (using the console of RStudio) to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the "FunctionSpr.R" file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. 
 
 run the code below that sources the function and applies it to all of the .csv files within the CSV folder.
