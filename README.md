@@ -1,7 +1,7 @@
 # Manipulating .csv Files that Contain a Variety of Data in Numerous Formatts 
 
 
-Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, once the rainbows fade and you realize that many files are in fact compiled and formatted in a way that makes you question your sanity, you begin your search for a way to read and manipulate the files to fit your needs. This is my story...
+Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, once the rainbows fade and you realize that many files are in fact compiled and formatted in a way that makes you question your sanity, you begin your search for a rational way to read and manipulate the files to fit your needs. This is my story...
 
 For my project, the .csv files that were in need of some TLC were collections of spring data collected over a large temporal and spatial scale. The files were initially unreadable because of the format of the title and the header, which were improperly spaced and did not correlate to each column of data. Due to the nature of the location and time of the data collections, differences in column names and values became a significant problem to overcome. For instance, some files listed the data collection time in GMT-04:00, while others listed it in GMT-05:00. Some files included the range of the spring, while other files omitted this info and had an overall fewer number of columns. Lastly, all of the files grouped date and time into the same column, so I took it upon myself to separate them into two distinct columns. 
 
