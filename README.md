@@ -34,7 +34,7 @@ And repeat
 until finished
 ```
 
-## Running the tests
+## Running the Code
 
 Explain how to run the automated tests for this system
 
