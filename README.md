@@ -1,4 +1,4 @@
-# Manipulating .csv Files that Contain a Variety of Data in Numerous Formatts 
+# Manipulating _.csv_ Files that Contain a Variety of Data in Different Formatts 
 
 
 Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, once the rainbows fade and you realize that many files are in fact compiled and formatted in a way that makes you question your sanity, you begin your search for a rational way to read and manipulate the files to fit your needs. This is my story...
