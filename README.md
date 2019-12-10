@@ -38,12 +38,12 @@ until finished
 
 To utilize the function that manipulates the files, we must first run the entire function (using the console of RStudio) to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the "FunctionSpr.R" file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. 
 
-run the code below that sources the function and applies it to all of the .csv files within the CSV folder.
+Once run, the code below sources the function and applies it to all of the .csv files within the CSV folder.
 ```
 source("FunctionSpr.R")
 SpringDat.R("CSV")
 ```
-This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files will keep their original filenames.
+This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
 ### Breaking it Down
 
@@ -74,7 +74,7 @@ The next part of the function drops the original _Date.Time_ column, which is un
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
-The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that F is replaced by C. The next part of the function (where it says "dir.create") creates a new folder named "SpringData" where outputs of each individual file will be sent.
+The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that F is replaced by C. The next part of the function (where it says "dir.create") creates a new folder named "SpringData" where outputs of each individual file will be sent. As previously mentioned, this step also includes code that consolidates all of the data from a particular sample location into a singular file. 
 ```
       tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
       Fextrc <- str_extract(tempcolname, Temppat)
