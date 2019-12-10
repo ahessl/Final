@@ -1,4 +1,4 @@
-StreamDat.R <- function(path) {
+SpringDat.R <- function(path) {
   glob.path <- paste0(path, "/*", ".csv")
   dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
   datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
@@ -32,8 +32,8 @@ StreamDat.R <- function(path) {
       select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
   }
   #create a new folder, save files to folder
-  dir.create("StreamData", showWarnings = F)
+  dir.create("SpringData", showWarnings = F)
   for (i in 1:length(dataFiles)){
-    write_csv(dataFiles[[i]], file.path("StreamData", basename(Sys.glob(glob.path)[i])))
+    write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
   }
 }
