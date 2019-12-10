@@ -10,7 +10,7 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-To begin, _________________________ 
+To begin, we want to download the -------- from GitHub. Then, we ---------------- 
 
 ### Prerequisites
 
@@ -33,8 +33,6 @@ And repeat
 ```
 until finished
 ```
-End with an example of getting some data out of the system or using it for a little demo
-
 
 ## Running the tests
 
@@ -60,20 +58,6 @@ Maven - Dependency Management
 ROME - Used to generate RSS Feeds
 
 
-## Versioning
-
-For the versions available, see the tags on this repository.
-
-
 ## Authors
 
 Hartford Johnson
-
-
-## License
-
-
-
-## Acknowledgments
-
-Appreciation to 
