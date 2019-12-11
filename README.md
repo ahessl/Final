@@ -1,6 +1,7 @@
 # Manipulating _.csv_ Files that Contain a Variety of Data in Different Formatts 
 
 ## Table of contents
+* [A Little Backstory...](#A-Little-Backstory...)
 * [Getting Started](#Getting-Started)
 * [Prerequisites](#Prerequisites)
 * [Installing](#Installing)
@@ -8,6 +9,8 @@
 * [Breaking it Down](#Breaking-it-Down)
 * [Built With](#Built-With)
 * [Author](#Author)
+
+## A Little Backstory...
 
 Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, you awake from your dream and remember that many files are in fact compiled and formatted in ways that make you question your sanity. Thus, you begin your search for a rational way to read and manipulate the files to fit your needs.
 
@@ -111,7 +114,7 @@ The next part of the function utilizes some of the patterns that were previously
       dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
       GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
 ```
-The next part of the function creates a new time column with the formatt of _Time GMT-**:00_.
+The next part of the function creates a new time column with the formatt of _Time GMT-0*:00_.
 ```
       timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
       names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
