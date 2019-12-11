@@ -1,5 +1,13 @@
 # Manipulating _.csv_ Files that Contain a Variety of Data in Different Formatts 
 
+## Table of contents
+* [Getting Started](#Getting-Started)
+* [Prerequisites](#Prerequisites)
+* [Installing](#Installing)
+* [Running the Code](#Running-the-Code)
+* [Breaking it Down](#Breaking-it-Down)
+* [Built With](#Built-With)
+* [Author](#Author)
 
 Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, you awake from your dream and remember that many files are in fact compiled and formatted in ways that make you question your sanity. Thus, you begin your search for a rational way to read and manipulate the files to fit your needs.
 
