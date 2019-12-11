@@ -36,9 +36,46 @@ until finished
 
 ## Running the Code
 
-To utilize the function that manipulates the files, we must first run the entire function (using the console of RStudio) to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the "FunctionSpr.R" file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. 
+To utilize the function that manipulates the files, we must first run the entire function within the console of RStudio in order to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the 'FunctionSpr.R' file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. For convenience, the function within 'FunctionSpr.R' is also listed below. 
 
-Once run, the code below sources the function and applies it to all of the .csv files within the CSV folder.
+```
+SpringDat.R <- function(path) {
+  glob.path <- paste0(path, "/*", ".csv")
+  dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
+  datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
+  timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
+  GMTpat <- "\\d{2}.\\d{2}"
+  Temppat <- "Temp\\.{3}[FC]"
+  for (i in 1:length(dataFiles)){
+    DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
+    dataFiles[[i]]$Date <- str_extract(DTCol,datepat)
+    dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
+    GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
+    timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
+    names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
+    dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
+    tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
+    Fextrc <- str_extract(tempcolname, Temppat)
+    is_F <- substr(Fextrc, nchar(Fextrc),nchar(Fextrc))=="F"
+    if (is_F) {
+      dataFiles[[i]] <- dataFiles[[i]] %>% 
+        mutate(convert=(!!as.name(tempcolname) - 32) * 5/9 )
+      Cextrc <- str_replace(Fextrc,"F","C")
+      newcolname <- str_replace(tempcolname, Fextrc, Cextrc)
+      dataFiles[[i]] <- dataFiles[[i]][, !grepl("Temp", names(dataFiles[[i]]))]
+      names(dataFiles[[i]])[names(dataFiles[[i]])=="convert"] <- newcolname
+    }
+    dataFiles[[i]] <- dataFiles[[i]] %>% 
+      select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
+  }
+  dir.create("SpringData", showWarnings = F)
+  for (i in 1:length(dataFiles)){
+    write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
+  }
+}
+```
+
+Once the function has been run in rstudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the .csv files is called CSV, so the function is applied to this folder. To achieve this, simply run the code below.
 ```
 source("FunctionSpr.R")
 SpringDat.R("CSV")
@@ -47,6 +84,7 @@ This command will run and edit each file individually, then export it to a newly
 
 ### Breaking it Down
 
+Although I was able to accomplish my tasks in the last section, this section's purpose is to provide explanation about the commands within my function. 
 The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the _.csv_ files while also skipping over the unnecessary title. Patterns are assigned to names so that they may be called upon at a later time to edit the 'Date.Time' columns.
 ```
 SpringDat.R <- function(path) {
@@ -74,7 +112,7 @@ The next part of the function drops the original _Date.Time_ column, which is un
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
-The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that F is replaced by C. The next part of the function (where it says "dir.create") creates a new folder named "SpringData" where outputs of each individual file will be sent. As previously mentioned, this step also includes code that consolidates all of the data from a particular sample location into a singular file. 
+The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that F is replaced by C. 
 ```
       tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
       Fextrc <- str_extract(tempcolname, Temppat)
@@ -90,6 +128,9 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
       dataFiles[[i]] <- dataFiles[[i]] %>% 
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
+```
+The function below creates a new folder named "SpringData" where outputs of each individual file will be sent. As previously mentioned, this step also includes code that consolidates all of the data from a particular sample location into a singular file. 
+```
    dir.create("SpringData", showWarnings = F)
       for (i in 1:length(dataFiles)){
        write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
