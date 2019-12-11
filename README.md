@@ -86,14 +86,14 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
        newcolname <- str_replace(tempcolname, Fextrc, Cextrc)
        dataFiles[[i]] <- dataFiles[[i]][, !grepl("Temp", names(dataFiles[[i]]))]
        names(dataFiles[[i]])[names(dataFiles[[i]])=="convert"] <- newcolname
-    }
-       dataFiles[[i]] <- dataFiles[[i]] %>% 
+      }
+      dataFiles[[i]] <- dataFiles[[i]] %>% 
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
-    }
+   }
    dir.create("SpringData", showWarnings = F)
       for (i in 1:length(dataFiles)){
        write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
-    }
+   }
 }
 ```
 
