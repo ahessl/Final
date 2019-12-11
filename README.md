@@ -103,7 +103,7 @@ The next part of the function utilizes some of the patterns that were previously
       dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
       GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
 ```
-The next part of the function creates a new time column with the formatt of _Time GMT-04:00_.
+The next part of the function creates a new time column with the formatt of _Time GMT-**:00_.
 ```
       timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
       names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
