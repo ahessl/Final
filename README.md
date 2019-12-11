@@ -21,7 +21,7 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-To begin, we want to select _Clone_ to download a ZIP of my repository. Save the folder to whichever directory that you would like to work in. Please note that the .csv files must remain inside of the folder titled "CSV" that is located in the working directory along with "FunctionSpr.R". Then,---------------- 
+To begin, we want to select _Clone_ to download a ZIP of my repository. Save the folder to whichever directory that you would like to work in. Please note that the .csv files must remain inside of the folder titled "CSV" that is located in the working directory along with 'FunctionSpr.R'. Then,---------------- 
 
 ### Prerequisites
 
