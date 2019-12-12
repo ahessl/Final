@@ -93,6 +93,13 @@ SpringDat.R("CSV")
 ```
 This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
+The files are now conveniently located in their own folder. If you would like a preview of how the data is formatted, you can run the code below and a table will display the info.
+```
+library(readr)
+BROYLES_U22_17_0311 <- read_csv("SpringData/BROYLES_U22_17_0311.csv")
+View(BROYLES_U22_17_0311)
+```
+
 ### Breaking it Down
 
 Although I was able to accomplish my tasks in the last section, this section's purpose is to provide some explanation about the commands within my function. 
