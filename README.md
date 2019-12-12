@@ -3,7 +3,7 @@
 ## Table of contents
 * [A Little Backstory...](#A-Little-Backstory...)
 * [Getting Started](#Getting-Started)
-** [Prerequisites](#Prerequisites)
+* [Prerequisites](#Prerequisites)
 * [Installing](#Installing)
 * [Running the Code](#Running-the-Code)
 * [Breaking it Down](#Breaking-it-Down)
