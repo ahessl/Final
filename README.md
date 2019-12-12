@@ -21,11 +21,11 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-From my 'Final' repository in github, we want to select 'Clone' to download a ZIP of my repository. Save this file to whatever directory your heart desires. Unzip the folder, then enter the consol of RStudio and use the command `setwd("Final-working")` to make this folder the working directory. Please note that the .csv files must remain inside of the folder titled 'CSV' that is located in the working directory along with 'FunctionSpr.R'. Then,---------------- 
+From my 'Final' repository in github, we want to select 'Clone' to download a ZIP of my repository. Save this file to whatever directory your heart desires. Unzip the folder, then enter the consol of RStudio and use the command `setwd("Final-working")` to make this folder the working directory. Please note that the .csv files must remain inside of the folder titled 'CSV' that is located in the working directory along with 'FunctionSpr.R'. 
 
 ### Prerequisites
 
-Within RStudio, run the following code to set stringsAsFactors to false, install and load the tidyverse (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load the tidyverse (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 options(stringsAsFactors = F)
 install.packages("tidyverse")
