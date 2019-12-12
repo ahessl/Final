@@ -123,7 +123,7 @@ The next part of the function drops the original _Date.Time_ column, which is un
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
-The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that F is replaced by C. 
+The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes '°F', the temp values are converted to celcius and the column name is edited so that 'F' is replaced by 'C'. 
 ```
       tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
       Fextrc <- str_extract(tempcolname, Temppat)
