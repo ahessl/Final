@@ -3,10 +3,10 @@
 ## Table of contents
 * [A Little Backstory...](#A-Little-Backstory...)
 * [Getting Started](#Getting-Started)
-* [Prerequisites](#Prerequisites)
-* [Installing](#Installing)
++ [Prerequisites](#Prerequisites)
++ [Installing](#Installing)
 * [Running the Code](#Running-the-Code)
-* [Breaking it Down](#Breaking-it-Down)
++ [Breaking it Down](#Breaking-it-Down)
 * [Built With](#Built-With)
 * [Author](#Author)
 
