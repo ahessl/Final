@@ -150,6 +150,6 @@ The function below creates a new folder named "SpringData" where outputs of each
 RStudio
 
 
-## Authors
+## Author
 
 Hartford Johnson
