@@ -21,7 +21,7 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Save this file to whatever directory your heart desires. Unzip the folder, then enter the consol of RStudio and use the command `setwd("Final-working")` to make this folder the working directory. Please note that the .csv files must remain inside of the folder titled _CSV_ that is located in the working directory along with _FunctionSpr.R_. 
+From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Save this file to whatever directory your heart desires. Unzip the folder, then enter the consol of RStudio and use the command `setwd("Final-working")` to make this folder the working directory. Please note that the .csv files must remain inside of the folder titled _CSV_. 
 
 ### Prerequisites
 
