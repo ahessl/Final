@@ -67,18 +67,34 @@ SpringDat.R <- function(path) {
     dataFiles[[i]] <- dataFiles[[i]] %>% 
       select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
   }
-  dir.create("SpringData", showWarnings = F)
+  filepattern <- "\\S+?_"
+  locations <- c()
   for (i in 1:length(dataFiles)){
-    write_csv(dataFiles[[i]], file.path("SpringData", basename(Sys.glob(glob.path)[i])))
+    locations <- c(locations,str_extract(basename(Sys.glob(glob.path)[i]),filepattern))
+  }
+  output <- list()
+  for (unique_location in unique(locations)){
+    tmp <- NULL
+    for (i in 1:length(locations)){
+      if(locations[i]==unique_location){
+        tmp <- bind_rows(tmp,dataFiles[[i]])
+      }
+    }
+    output[[unique_location]] <- tmp
+  }
+  dir.create("SpringData", showWarnings = F)
+  for (i in 1:length(output)){
+    filename <- paste0(substr(names(output)[i],1,nchar(names(output)[i])-1),".csv")
+    write_csv(output[[i]], file.path("SpringData",filename))
   }
 }
 ```
-
 Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve this, simply run the code below.
 ```
 source("FunctionSpr.R")
 SpringDat.R("CSV")
 ```
+
 This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
 The files are now conveniently located in their own folder. If you would like a preview of how the data is formatted, you can run the code below and a table will display the info in RStudio.
@@ -136,7 +152,7 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
 ```
-This code consolidates all of the data from a particular sample location into a singular file. 
+This code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv".
 ```
     filepattern <- "\\S+?_"
       locations <- c()
@@ -154,7 +170,7 @@ This code consolidates all of the data from a particular sample location into a 
        output[[unique_location]] <- tmp
      }
 ```
-The command below creates a new folder named "SpringData" where outputs of each individual file will be sent. 
+The command below creates a new folder named "SpringData" where the outputs of appended spring files will be sent. 
 ```
       dir.create("SpringData", showWarnings = F)
       for (i in 1:length(output)){
