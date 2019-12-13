@@ -138,29 +138,29 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
 ```
 This code consolidates all of the data from a particular sample location into a singular file. 
 ```
-filepattern <- "\\S+?_"
-  locations <- c()
-  for (i in 1:length(dataFiles)){
-    locations <- c(locations,str_extract(basename(Sys.glob(glob.path)[i]),filepattern))
+    filepattern <- "\\S+?_"
+      locations <- c()
+      for (i in 1:length(dataFiles)){
+       locations <- c(locations,str_extract(basename(Sys.glob(glob.path)[i]),filepattern))
   }
-  output <- list()
-  for (unique_location in unique(locations)){
-    tmp <- NULL
-    for (i in 1:length(locations)){
-      if(locations[i]==unique_location){
-        tmp <- bind_rows(tmp,dataFiles[[i]])
-      }
-    }
-    output[[unique_location]] <- tmp
-  }
+      output <- list()
+      for (unique_location in unique(locations)){
+       tmp <- NULL
+       for (i in 1:length(locations)){
+         if(locations[i]==unique_location){
+           tmp <- bind_rows(tmp,dataFiles[[i]])
+         }
+       }
+       output[[unique_location]] <- tmp
+     }
 ```
 The command below creates a new folder named "SpringData" where outputs of each individual file will be sent. 
 ```
-   dir.create("SpringData", showWarnings = F)
-   for (i in 1:length(output)){
-    filename <- paste0(substr(names(output)[i],1,nchar(names(output)[i])-1),".csv")
-    write_csv(output[[i]], file.path("SpringData",filename))
-  }
+      dir.create("SpringData", showWarnings = F)
+      for (i in 1:length(output)){
+       filename <- paste0(substr(names(output)[i],1,nchar(names(output)[i])-1),".csv")
+       write_csv(output[[i]], file.path("SpringData",filename))
+      }
 }
 ```
 
