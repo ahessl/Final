@@ -21,15 +21,15 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Save this file to your current working directory. Please note that the .csv files must remain inside of the folder titled _CSV_. 
+From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Unzip the ZIP and open the project titled _Desktop.Rproj_. This will open up RStudio and create a relative path from which the files and functions can be accessed. Please note that the .csv files must remain inside of the folder titled _CSV_. 
 
 ### Prerequisites
 
-In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data manipulation) and _here_ (a package useful for avoiding absolute paths), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 options(stringsAsFactors = F)
-install.packages(c("tidyverse", "here"))
-library(c("tidyverse", "here"))
+install.packages("tidyverse")
+library("tidyverse")
 path <- "CSV"
 ```
 
