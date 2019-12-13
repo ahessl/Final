@@ -33,18 +33,6 @@ library("tidyverse")
 path <- "CSV"
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development environment running. 
-Say what the step will be. 
-```
-Give the example
-```
-And repeat
-```
-until finished
-```
-
 ## Running the Code
 
 To utilize the function that manipulates the files, we must first run the entire function within the console of RStudio in order to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the _FunctionSpr.R_ file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. For convenience, the function within _FunctionSpr.R_ is also listed below. 
