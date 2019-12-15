@@ -97,9 +97,11 @@ SpringDat.R("CSV")
 
 This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
-The output of this function will look like this:
+The output of this function will add the folder _SpringData_ to the working directory.
 
 ![Working Directory](Working_Directory.png)
+
+Within _SpringData_, the consolidated files for Broyles, Coburn, and Gmill are displayed.
 
 ![CSV Files](CSV_Files.png)
 
