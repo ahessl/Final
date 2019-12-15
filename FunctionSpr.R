@@ -1,4 +1,5 @@
 SpringDat.R <- function(path) {
+  ###########DELETE
   glob.path <- paste0(path, "/*", ".csv")
   dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
   datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
