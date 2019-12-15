@@ -25,7 +25,9 @@ From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZI
 
 ### Prerequisites
 
-In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data viewing and manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+It is a good idea to clear the global environment prior to running this code. Make sure everything you are working on is saved, then, in the consol of RStudio, run the code `rm(list = ls())`. 
+
+The following code is used to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data viewing and manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 options(stringsAsFactors = F)
 install.packages("tidyverse")
