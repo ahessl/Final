@@ -25,7 +25,7 @@ From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZI
 
 ### Prerequisites
 
-In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+In the consol of RStudio, run the following code to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data viewing and manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 options(stringsAsFactors = F)
 install.packages("tidyverse")
@@ -107,7 +107,6 @@ Within _SpringData_, the consolidated files for Broyles, Coburn, and Gmill are d
 
 The files are now conveniently located in their own folder. If you would like a preview of how the data is formatted, you can run the code below and a table will display the info of _BROYLES_ in RStudio.
 ```
-library(readr)
 BROYLES <- read_csv("SpringData/BROYLES.csv")
 View(BROYLES)
 ```
