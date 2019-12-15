@@ -99,9 +99,9 @@ This command will run and edit each file individually, then export it to a newly
 
 The output of this function will look like this:
 
-![Working Directory](./images/Working_Directory.png)
+![Working Directory](Working_Directory.png)
 
-![CSV Files](./images/CSV_Files.png)
+![CSV Files](CSV_Files.png)
 
 The files are now conveniently located in their own folder. If you would like a preview of how the data is formatted, you can run the code below and a table will display the info of _BROYLES_ in RStudio.
 ```
