@@ -163,7 +163,7 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
 ```
-This code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern ("filepattern") that looks for the name of the sample location before the first underscore in the name. All of the files that were recorded at the same sample location will have the same filename at this step due to the use of ("filepattern") in the for loop, at which point these files will be merged together using the _bind_rows_ command. 
+This code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern ("filepattern") that looks for the name of the sample location before the first underscore in the name. All of the files that were recorded at the same sample location will have the same filename at this step due to the use of "filepattern" in the for loop, at which point these files will be merged together using the _bind_rows_ command. 
 ```
     filepattern <- "\\S+?_"
       locations <- c()
