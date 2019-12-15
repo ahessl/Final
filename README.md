@@ -111,7 +111,7 @@ View(BROYLES)
 ```
 The table will look like this:
 
-![Table](./images/Table.png)
+![Table](Table.png)
 
 ### Breaking it Down
 
