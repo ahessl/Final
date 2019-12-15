@@ -91,7 +91,7 @@ SpringDat.R <- function(path) {
   }
 }
 ```
-Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve press the _Source_ button near the top of the page, above the RScript. 
+Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve this, we first need to source the function. We can do this by pressing the _Source_ button near the top of the page, above the R Script. 
 ![Source](Images/Source.png)
 
 Then, run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
