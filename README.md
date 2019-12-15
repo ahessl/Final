@@ -99,11 +99,11 @@ This command will run and edit each file individually, then export it to a newly
 
 The output of this function will add the folder _SpringData_ to the working directory.
 
-![Working Directory](Working_Directory.png)
+![Working Directory](Images/Working_Directory.png)
 
 Within _SpringData_, the consolidated files for Broyles, Coburn, and Gmill are displayed.
 
-![CSV Files](CSV_Files.png)
+![CSV Files](Images/CSV_Files.png)
 
 The files are now conveniently located in their own folder. If you would like a preview of how the data is formatted, you can run the code below and a table will display the info of _BROYLES_ in RStudio.
 ```
@@ -113,7 +113,7 @@ View(BROYLES)
 ```
 The table will look like this:
 
-![Table](Table.png)
+![Table](Images/Table.png)
 
 ### Breaking it Down
 
