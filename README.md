@@ -91,11 +91,10 @@ SpringDat.R <- function(path) {
   }
 }
 ```
-Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve this, simply run the code below.
-```
-source("FunctionSpr.R")
-SpringDat.R("CSV")
-```
+Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve press the _Source_ button near the top of the page, above the RScript. 
+![Source](Images/Source.png)
+
+Then, run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
 
 This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
