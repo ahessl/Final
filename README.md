@@ -99,7 +99,7 @@ This command will run and edit each file individually, then export it to a newly
 
 The output of this function will add the folder _SpringData_ to the working directory.
 
-![Working Directory](Images/Working_Directory.png)
+![Working Directory](Images/WorkingDirectory.png)
 
 Within _SpringData_, the consolidated files for Broyles, Coburn, and Gmill are displayed.
 
