@@ -40,7 +40,7 @@ library("tidyverse")
 
 To utilize the function that manipulates the files, we must first _Source_ the function in order to asign the code to our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, 
 open _FunctionSpr.R_ in RStudio by selecting it from the list of files on the right side of the window. 
-Once the function is open in the R Script, press the _Source_ button near the top of the page, above the R Script.
+Once the function is open in the R Script, press the _Source_ button at the top of the R Script.
 
 ![Source](Images/Source.png)
 
@@ -98,7 +98,7 @@ SpringDat.R <- function(path) {
   }
 }
 ```
-Once the function has been run in RStudio, it can be applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. The next step is to run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
+Once the function has been sourced, it can be applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. The next step is to run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
 
 This command will run and edit each file individually, then export them to a newly created folder titled "SpringData" that will show up within the working directory. The newly edited files that were collected from the same sample location (those that share the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
