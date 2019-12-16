@@ -29,7 +29,7 @@ SpringDat.R <- function(path) {
     dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
     #drops the original "Date.Time" column
     tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
-    #sets the Temp column to "tempcolname"
+    #sets the "Temp" column to "tempcolname"
     Fextrc <- str_extract(tempcolname, Temppat)
     #applies the temp pattern to temp columns, names the command Fextrc
     is_F <- substr(Fextrc, nchar(Fextrc),nchar(Fextrc))=="F"
@@ -38,20 +38,19 @@ SpringDat.R <- function(path) {
     #if statement to be used if temp values are in F.
       dataFiles[[i]] <- dataFiles[[i]] %>% 
         mutate(convert=(!!as.name(tempcolname) - 32) * 5/9 )
-        #converts the values within the column to celcius, places values back in original column and file
+        #converts the values within the column to celcius (creates new column in the process)
       Cextrc <- str_replace(Fextrc,"F","C")
-      #replaces the F in the column name to a C
+      #command to replace the F in the column name to a C, set to Cextrc
       newcolname <- str_replace(tempcolname, Fextrc, Cextrc)
-      #
+      #command to convert F in column names to C where applicable, set to "newcolname"
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Temp", names(dataFiles[[i]]))]
-      #
+      #removes pre-conversion "Temp" columns 
       names(dataFiles[[i]])[names(dataFiles[[i]])=="convert"] <- newcolname
-      #
+      #command run to convert "F" in column names to "C"
     }
     dataFiles[[i]] <- dataFiles[[i]] %>% 
-    #
       select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
-      #
+      #adds correct GMT value to the column name, in the format previously defined by "timecol". Important since creating new columns removed GMT value.
   }
   filepattern <- "\\S+?_"
   #creates a pattern that identifies the name of the sample location before the first underscore in the name  
