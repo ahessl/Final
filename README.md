@@ -167,7 +167,7 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
 ```
-The following code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern (named "filepattern") that identifies the name of the sample location before the first underscore in the name. All of the files that share the same serial number will now have the same filename due to the use of this pattern within the for loop. At this point the files are merged together using the _bind_rows_ command, which conveniently merges them in chronological order.
+The following code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended to a file called "BROYLES.csv". It accomplishes this by creating a pattern (named "filepattern") that identifies the name of the sample location before the first underscore in the name. All of the files that share the same serial number will now have the same filename due to the use of this pattern within the for loop. At this point the files are merged together using the _bind_rows_ command, which conveniently merges them in chronological order.
 ```
     filepattern <- "\\S+?_"
       locations <- c()
