@@ -44,7 +44,7 @@ Once the function is open in the R Script, press the _Source_ button at the top 
 
 ![Source](Images/Source.png)
 
-For convenience, the function within _FunctionSpr.R_ is also listed below. 
+For the convenience of visualization, the function within _FunctionSpr.R_ is also listed below. 
 
 ```
 SpringDat.R <- function(path) {
