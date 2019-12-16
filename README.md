@@ -40,7 +40,7 @@ library("tidyverse")
 
 To utilize the function that manipulates the files, we must first _Source_ the function in order to asign the code to our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, 
 open _FunctionSpr.R_ in RStudio by selecting it from the list of files on the right side of the window. 
-We can do this by pressing the _Source_ button near the top of the page, above the R Script.
+Once the function is open in the R Script, press the _Source_ button near the top of the page, above the R Script.
 
 ![Source](Images/Source.png)
 
