@@ -26,15 +26,15 @@ From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZI
 
 It is a good idea to clear the global environment prior to running this code. Make sure everything you are working on is saved, then, in the consol of RStudio run the code `rm(list = ls())`. 
 
-The following code is used to set stringsAsFactors to false, set the CSV folder containing the .csv files as the path that will be used within the function. The _install.packages_ command downloads the _tidyverse_, which is a collection of packages for data viewing and manipulation. The next command, _library_, loads the tidyverse. 
+The following _install.packages_ command downloads the _tidyverse_, which is a collection of packages for data viewing and manipulation. These packages are needed to read and manipulate the data.
 ```
-options(stringsAsFactors = F)
-path <- "CSV"
 install.packages("tidyverse")
 ```
-The blocks of code are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road. 
+The next command, _library_, loads the tidyverse. The commands to install and load are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road.  The next command is used to set _stringsAsFactors_ to 'false' so that the dataframe is not read as factor variables. The last line of code sets the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 library("tidyverse")
+options(stringsAsFactors = F)
+path <- "CSV"
 ```
 ## Running the Code
 
@@ -102,7 +102,7 @@ Once the function has been sourced, it can be applied to numerous files/folders 
 
 This command will run and edit each file individually, then export them to a newly created folder titled "SpringData" that will show up within the working directory. The newly edited files that were collected from the same sample location (those that share the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
-Th output of the command can be seen below, with the new SpringData folder located in the working directory.
+Th output of the command can be seen below, with the new _SpringData_ folder located in the working directory.
 
 ![Working Directory](Images/WorkingDirectory.png)
 
@@ -123,7 +123,7 @@ The table will look like this:
 
 Although I was able to accomplish my tasks in the last section, this section's purpose is to provide some explanation about the code within my function. 
 
-The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the .csv files while also skipping over some of the unnecessary headers. Patterns are assigned to names ("timepat", "datepat", "GMTpat", and "Temppat") so that they may be called upon at a later time to edit the _Date.Time_ columns.
+The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the .csv files while also skipping over some of the unnecessary headers. Patterns are assigned to names ("timepat", "datepat", "GMTpat", and "Temppat") so that they may be called upon at a later time to edit the _Date.Time_ column. To reiderate, the reason we are working on this column is because it has grouped together two values that we want to be separate.
 ```
 SpringDat.R <- function(path) {
    glob.path <- paste0(path, "/*", ".csv")
@@ -133,7 +133,7 @@ SpringDat.R <- function(path) {
    GMTpat <- "\\d{2}.\\d{2}"
    Temppat <- "Temp[\\.Â]+?[FC]"
 ```
-The next part of the function utilizes two of the patterns that were previously created ("datepat", and "timepat")to separate the _Date.Time_ column into two separate columns.
+The next part of the function utilizes two of the patterns that were previously created ("datepat", and "timepat")to separate the _Date.Time_ column into two separate columns. 
 ```
    for (i in 1:length(dataFiles)){
       DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
@@ -146,7 +146,7 @@ The next part of the function creates a new time column that is formatted as _Ti
       timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
       names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
 ```
-The next part of the function drops the original _Date.Time_ column using the _grep_ command, since separate columns were created for both _Date_ and _Time_.
+The next part of the function drops the original _Date.Time_ column using the _grep_ command, since separate columns have been created for both _Date_ and _Time_.
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
@@ -167,7 +167,7 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
 ```
-The following code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern ("filepattern") that identifies the name of the sample location before the first underscore in the name. All of the files that share the same serial number will now have the same filename due to the use of this pattern within the for loop. At this point the files are merged together using the _bind_rows_ command, which conveniently merges them in chronological order.
+The following code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern (named "filepattern") that identifies the name of the sample location before the first underscore in the name. All of the files that share the same serial number will now have the same filename due to the use of this pattern within the for loop. At this point the files are merged together using the _bind_rows_ command, which conveniently merges them in chronological order.
 ```
     filepattern <- "\\S+?_"
       locations <- c()
@@ -185,7 +185,7 @@ The following code consolidates all of the data from each sample location into a
        output[[unique_location]] <- tmp
      }
 ```
-The command below creates a new folder named "SpringData" where the outputs of appended spring files will be sent. This new folder will be created within the working directory ("Final-working").
+The final portion of the function creates a new folder named "SpringData" where the outputs of appended spring files will be sent. This new folder will be created within the working directory ("Final-working").
 ```
       dir.create("SpringData", showWarnings = F)
       for (i in 1:length(output)){
