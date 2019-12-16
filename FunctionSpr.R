@@ -65,27 +65,27 @@ SpringDat.R <- function(path) {
   output <- list()
   #lists vectors containing other objects, sets it to "output"
   for (unique_location in unique(locations)){
-  #
+  #runs for loop for all unique locations
     tmp <- NULL
-    #
+    #set new tmp variable to NULL
     for (i in 1:length(locations)){
-    #
+    #runs for loop for all unique site names in folder
       if(locations[i]==unique_location){
-      #
+      #run if statement for locations whose name matches other files
         tmp <- bind_rows(tmp,dataFiles[[i]])
-        #
+        #command to merge files from the same study site into one file set as the name "tmp"
       }
     }
     output[[unique_location]] <- tmp
-    #
+    #runs the previous command to append all files from same location, outputs the files
   }
   dir.create("SpringData", showWarnings = F)
-  #
+  #creates new directory called "SpringData"
   for (i in 1:length(output)){
-  #
+  #runs for loop for each file in working directory
     filename <- paste0(substr(names(output)[i],1,nchar(names(output)[i])-1),".csv")
-    #
+    #pastes the name of the study site, removing spaces and adding ".csv" to the end of the name
     write_csv(output[[i]], file.path("SpringData",filename))
-    #
+    #outputs the modified files into the newly created folder "SpringData"
   }
 }
