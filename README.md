@@ -21,23 +21,30 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Unzip the ZIP and open the project titled _Desktop.Rproj_. This will open up RStudio and create a relative path from which the files and functions can be accessed. Please note that the .csv files must remain inside of the folder titled _CSV_. 
+From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Unzip the ZIP file, enter the Final-working folder, and open the project titled _Desktop.Rproj_. This will open up RStudio and create a relative path from which the files and functions can be accessed. Please note that the .csv files must remain inside of the folder titled _CSV_. 
 
 ### Prerequisites
 
-It is a good idea to clear the global environment prior to running this code. Make sure everything you are working on is saved, then, in the consol of RStudio, run the code `rm(list = ls())`. 
+It is a good idea to clear the global environment prior to running this code. Make sure everything you are working on is saved, then, in the consol of RStudio run the code `rm(list = ls())`. 
 
-The following code is used to set stringsAsFactors to false, install and load _tidyverse_ (a collection of packages for data viewing and manipulation), and to set the CSV folder containing the .csv files as the path that will be used within the function. 
+The following code is used to set stringsAsFactors to false, set the CSV folder containing the .csv files as the path that will be used within the function. The _install.packages_ command downloads the _tidyverse_, which is a collection of packages for data viewing and manipulation. The next command, _library_, loads the tidyverse. The blocks of code are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road. 
 ```
 options(stringsAsFactors = F)
-install.packages("tidyverse")
-library("tidyverse")
 path <- "CSV"
-``` 
-
+install.packages("tidyverse")
+```
+```
+library("tidyverse")
+```
 ## Running the Code
 
-To utilize the function that manipulates the files, we must first run the entire function within the console of RStudio in order to asign it our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, open the _FunctionSpr.R_ file in RStudio. Select the entire function and run it, making sure that the name "SpringDat.R" has shown up in the _Functions_ portion of the R _Environment_ in the upper right-hand corner. For convenience, the function within _FunctionSpr.R_ is also listed below. 
+To utilize the function that manipulates the files, we must first source the function in order to asign the code to our desired name. This allows us to later call upon this function by simply typing the name we have assigned it. To do this, 
+open _FunctionSpr.R_ in RStudio by selecting it from the list of files on the right side of the window. 
+We can do this by pressing the _Source_ button near the top of the page, above the R Script.
+
+![Source](Images/Source.png)
+
+For convenience, the function within _FunctionSpr.R_ is also listed below. 
 
 ```
 SpringDat.R <- function(path) {
@@ -46,7 +53,7 @@ SpringDat.R <- function(path) {
   datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
   timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
   GMTpat <- "\\d{2}.\\d{2}"
-  Temppat <- "Temp\\.{3}[FC]"
+  Temppat <- "Temp[\\.Â]+?[FC]"
   for (i in 1:length(dataFiles)){
     DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
     dataFiles[[i]]$Date <- str_extract(DTCol,datepat)
@@ -91,15 +98,11 @@ SpringDat.R <- function(path) {
   }
 }
 ```
-Once the function has been run in RStudio, it can be sourced and applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. To achieve this, we first need to source the function. We can do this by pressing the _Source_ button near the top of the page, above the R Script.
+Once the function has been run in RStudio, it can be applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. The next step is to run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
 
-![Source](Images/Source.png)
+This command will run and edit each file individually, then export them to a newly created folder titled "SpringData" that will show up within the working directory. The newly edited files that were collected from the same sample location (those that share the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
-Then, run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
-
-This command will run and edit each file individually, then export it to a newly created folder titled "SpringData" within the working directory. The newly edited files that are from the same sample location (with the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
-
-The output of this function will add the folder _SpringData_ to the working directory.
+Th output of the command can be seen below, with the new SpringData folder located in the working directory.
 
 ![Working Directory](Images/WorkingDirectory.png)
 
@@ -118,7 +121,7 @@ The table will look like this:
 
 ### Breaking it Down
 
-Although I was able to accomplish my tasks in the last section, this section's purpose is to provide some explanation about the commands within my function. 
+Although I was able to accomplish my tasks in the last section, this section's purpose is to provide some explanation about the code within my function. 
 
 The very first line of code renames the function of the path (in this case the path being = to CSV) to _SpringDat.R_, which can then be called upon from the command line at a later time. The subsequent code allows us to read the .csv files while also skipping over some of the unnecessary headers. Patterns are assigned to names ("timepat", "datepat", "GMTpat", and "Temppat") so that they may be called upon at a later time to edit the _Date.Time_ columns.
 ```
@@ -128,7 +131,7 @@ SpringDat.R <- function(path) {
    datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
    timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
    GMTpat <- "\\d{2}.\\d{2}"
-   Temppat <- "Temp\\.{3}[FC]"
+   Temppat <- "Temp[\\.Â]+?[FC]"
 ```
 The next part of the function utilizes two of the patterns that were previously created ("datepat", and "timepat")to separate the _Date.Time_ column into two separate columns.
 ```
@@ -147,7 +150,7 @@ The next part of the function drops the original _Date.Time_ column using the _g
 ```
       dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
 ```
-The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes _°F_, the temp values are converted to celcius and the column name is edited so that _F_ is replaced by _C_. 
+The next part of the function checks to see if the _Temp_ column is listed in fahrenheit or celcius. If the column name includes _°F_, the temp values are converted to celcius and the column name is edited so that _F_ is replaced by _C_. If the column already includes _°C_, no change is made.
 ```
       tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
       Fextrc <- str_extract(tempcolname, Temppat)
@@ -164,7 +167,7 @@ The next part of the function checks to see if the _Temp_ column is listed in fa
         select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname,    everything())
    }
 ```
-This code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern ("filepattern") that looks for the name of the sample location before the first underscore in the name. All of the files that were recorded at the same sample location will have the same filename at this step due to the use of "filepattern" in the for loop, at which point these files will be merged together using the _bind_rows_ command. 
+The following code consolidates all of the data from each sample location into a singular file, ie. all of the samples taken from BROYLES will be appended into a file called "BROYLES.csv". It accomplishes this by creating a pattern ("filepattern") that identifies the name of the sample location before the first underscore in the name. All of the files that share the same serial number will now have the same filename due to the use of this pattern within the for loop. At this point the files are merged together using the _bind_rows_ command, which conveniently merges them in chronological order.
 ```
     filepattern <- "\\S+?_"
       locations <- c()
@@ -191,6 +194,7 @@ The command below creates a new folder named "SpringData" where the outputs of a
       }
 }
 ```
+Congratulations! You have successfully taken control of your computer and cleaned up those .csv files! The best part is, you aren't even dreaming this time. 
 
 ## Built With
 
