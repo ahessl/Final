@@ -26,12 +26,13 @@ From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZI
 
 It is a good idea to clear the global environment prior to running this code. Make sure everything you are working on is saved, then, in the consol of RStudio run the code `rm(list = ls())`. 
 
-The following code is used to set stringsAsFactors to false, set the CSV folder containing the .csv files as the path that will be used within the function. The _install.packages_ command downloads the _tidyverse_, which is a collection of packages for data viewing and manipulation. The next command, _library_, loads the tidyverse. The blocks of code are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road. 
+The following code is used to set stringsAsFactors to false, set the CSV folder containing the .csv files as the path that will be used within the function. The _install.packages_ command downloads the _tidyverse_, which is a collection of packages for data viewing and manipulation. The next command, _library_, loads the tidyverse. 
 ```
 options(stringsAsFactors = F)
 path <- "CSV"
 install.packages("tidyverse")
 ```
+The blocks of code are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road. 
 ```
 library("tidyverse")
 ```
