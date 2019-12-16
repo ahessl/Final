@@ -4,7 +4,6 @@
 * [Introduction](#Introduction)
 * [Getting Started](#Getting-Started)
   + [Prerequisites](#Prerequisites)
-  + [Installing](#Installing)
 * [Running the Code](#Running-the-Code)
   + [Breaking it Down](#Breaking-it-Down)
 * [Built With](#Built-With)
