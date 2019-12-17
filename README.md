@@ -196,11 +196,14 @@ The final portion of the function creates a new folder named "SpringData" where 
 ```
 Congratulations! You have successfully taken control of your computer and cleaned up those .csv files! The best part is, you aren't even dreaming this time. 
 
-## Built With
-
-RStudio
-
-
 ## Author
 
-Hartford Johnson
+Hartford Johnson, West Virginia University
+
+## Built With
+
+RStudio, Zoloft, and Grit
+
+## Acknowledgements 
+
+Thanks to Dr. Dorothy Vesper of West Virginia University for providing the data, and thanks to Dr. Amy Hessl of West Virginia University for providing my project idea. 
