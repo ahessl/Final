@@ -20,7 +20,7 @@ My tasks for this project include:
 * Convert Temperature columns from Fahrenheit to Celcius
 * Apend multiple files from the same sample location into one comprehensive file
 * Create a function so that the code can be run on all files at once
-* Creating code that will output all new files into a new folder
+* Create code that will output all new files into a new folder
 
 
 ## Getting Started
