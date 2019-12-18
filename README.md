@@ -1,4 +1,4 @@
-# How to Read and Edit Hobo Files from the Same Type of Instrument 
+# How to Read and Edit .Hobo Files from the Same Type of Data Logger 
 
 ## Table of contents
 * [Introduction](#Introduction)
