@@ -16,11 +16,11 @@ Once in a blue moon, under the arc of a double rainbow, you might find yourself 
 For my project, the .csv files that were in need of some TLC were collections of spring data collected over a large temporal and spatial scale. The files were initially unreadable because of the format of the title and the header, which were improperly spaced and did not correlate to each column of data. 
 
 My tasks for this project include:
-* [Separate the "Date.Time" column into two independent columns]
-* [Convert Temperature columns from Fahrenheit to Celcius]
-* [Apend multiple files from the same sample location into one comprehensive file]
-* [Create a function so that the code can be run on all files at once]
-* [Creating code that will output all new files into a new folder]
+* Separate the "Date.Time" column into two independent columns
+* Convert Temperature columns from Fahrenheit to Celcius
+* Apend multiple files from the same sample location into one comprehensive file
+* Create a function so that the code can be run on all files at once
+* Creating code that will output all new files into a new folder
 
 
 ## Getting Started
@@ -28,9 +28,9 @@ My tasks for this project include:
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
 To start:
-* [From my _Final_ repository in GitHub, select _Clone_ to download a ZIP of my repository]
-* [Extract the ZIP file, enter the _Final-working_ folder, and open the project titled _Desktop.Rproj_] 
-    + [Please note that the .csv files must remain inside of the folder titled _CSV_]
+* From my _Final_ repository in GitHub, select _Clone_ to download a ZIP of my repository
+* Extract the ZIP file, enter the _Final-working_ folder, and open the project titled _Desktop.Rproj_ 
+    + Please note that the .csv files must remain inside of the folder titled _CSV_
 
 ### Prerequisites
 
