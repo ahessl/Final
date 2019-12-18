@@ -1,0 +1,37 @@
+---
+title: "SpringFinalRMD"
+author: "Hartford Johnson"
+date: "12/18/2019"
+output: html_document
+---
+
+Once everything is saved, run to clear your Global Environment.
+```{r}
+rm(list = ls())
+```
+
+Run this to download the "tidyverse" if you have not done so. It will take a minute or two to download if it is your first time running the code.
+```{r}
+install.packages("tidyverse")
+```
+
+Once "tidyverse is downloaded, run this code to load the packages.
+```{r}
+library("tidyverse")
+```
+
+This will source the function, readying it for use on the CSV folder.
+```{r}
+source(FunctionSpr.R)
+```
+
+This will run the function for the files within the CSV folder. Running this will create a new folder titled "SpringData" with the modified files located within.
+```{r}
+SpringDat.R("CSV")
+```
+
+This will display a table with the data of a single file. While not neccesary to run, this code does provide one of the better looking visuals for this type of data.
+```{r}
+BROYLES <- read_csv("SpringData/BROYLES.csv")
+View(BROYLES)
+```
