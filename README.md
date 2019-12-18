@@ -31,6 +31,8 @@ To start:
 * From my _Final_ repository in GitHub, select _Clone_ to download a ZIP of my repository
 * Extract the ZIP file, enter the _Final-working_ folder, and open the project titled _Desktop.Rproj_ 
     + Please note that the .csv files must remain inside of the folder titled _CSV_
+    
+If you would like to access the following code without a detailed explanation, you can view my R Markdown file for an accelerated approach.
 
 ### Prerequisites
 
