@@ -22,7 +22,7 @@ library("tidyverse")
 
 This will source the function, readying it for use on the CSV folder.
 ```{r}
-source(FunctionSpr.R)
+source("FunctionSpr.R")
 ```
 
 This will run the function for the files within the CSV folder. Running this will create a new folder titled "SpringData" with the modified files located within.
