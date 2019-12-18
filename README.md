@@ -1,4 +1,4 @@
-# How to Read and Edit Hobo Files from the Same Instrument 
+# How to Read and Edit Hobo Files from the Same Type of Instrument 
 
 ## Table of contents
 * [Introduction](#Introduction)
