@@ -1,4 +1,4 @@
-# Manipulating _.csv_ Files that Contain a Variety of Data in Different Formatts 
+# How to Read and Edit Hobo Files from the Same Instrument 
 
 ## Table of contents
 * [Introduction](#Introduction)
@@ -13,14 +13,24 @@
 
 Once in a blue moon, under the arc of a double rainbow, you might find yourself blessed with a perfectly formatted .csv file. However, you awake from your dream and remember that many files are in fact compiled and formatted in ways that make you question your sanity. Thus, you begin your search for a rational way to read and manipulate the files to fit your needs.
 
-For my project, the .csv files that were in need of some TLC were collections of spring data collected over a large temporal and spatial scale. The files were initially unreadable because of the format of the title and the header, which were improperly spaced and did not correlate to each column of data. Due to the nature of the location and time of the data collections, differences in column names and values became a significant problem to overcome. For instance, some files listed the data collection time in GMT-04:00, while others listed it in GMT-05:00. Some files included the range of the spring, while other files omitted this info and thus had fewer columns. Additionally, all of the files grouped _Date_ and _Time_ into the same column, so I took it upon myself to separate them into two distinct columns. Lastly, I appended multiple files from the same sample location into a sinlge, comprehensive file.
+For my project, the .csv files that were in need of some TLC were collections of spring data collected over a large temporal and spatial scale. The files were initially unreadable because of the format of the title and the header, which were improperly spaced and did not correlate to each column of data. 
+
+My tasks for this project include:
+* [Separate the "Date.Time" column into two independent columns]
+* [Convert Temperature columns from Fahrenheit to Celcius]
+* [Apend multiple files from the same sample location into one comprehensive file]
+* [Create a function so that the code can be run on all files at once]
+* [Creating code that will output all new files into a new folder]
 
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for access to the code, files, and outputs.
 
-From my _Final_ repository in GitHub, we want to select _Clone_ to download a ZIP of my repository. Unzip the ZIP file, enter the Final-working folder, and open the project titled _Desktop.Rproj_. This will open up RStudio and create a relative path from which the files and functions can be accessed. Please note that the .csv files must remain inside of the folder titled _CSV_. 
+To start:
+* [From my _Final_ repository in GitHub, select _Clone_ to download a ZIP of my repository]
+* [Extract the ZIP file, enter the _Final-working_ folder, and open the project titled _Desktop.Rproj_] 
+    + [Please note that the .csv files must remain inside of the folder titled _CSV_]
 
 ### Prerequisites
 
@@ -44,65 +54,11 @@ Once the function is open in the R Script, press the _Source_ button at the top 
 
 ![Source](Images/Source.png)
 
-For the convenience of visualization, the function within _FunctionSpr.R_ is also listed below. 
-
-```
-SpringDat.R <- function(path) {
-  glob.path <- paste0(path, "/*", ".csv")
-  dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
-  datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
-  timepat <- "\\d{2}\\:\\d{2}\\:\\d{2} [AP]M"
-  GMTpat <- "\\d{2}.\\d{2}"
-  Temppat <- "Temp[\\.Â]+?[FC]"
-  for (i in 1:length(dataFiles)){
-    DTCol <- dataFiles[[i]][, grepl("Date.Time", names(dataFiles[[i]]))]
-    dataFiles[[i]]$Date <- str_extract(DTCol,datepat)
-    dataFiles[[i]]$Time <- str_extract(DTCol,timepat)
-    GMTval <- str_extract(names(dataFiles[[i]])[grepl("Date.Time", names(dataFiles[[i]]))], GMTpat)
-    timecol <- paste0("Time, GMT-", substr(GMTval,1,2),":",substr(GMTval,4,5))
-    names(dataFiles[[i]])[names(dataFiles[[i]])=="Time"] <- timecol
-    dataFiles[[i]] <- dataFiles[[i]][, !grepl("Date.Time", names(dataFiles[[i]]))]
-    tempcolname <- names(dataFiles[[i]])[grepl("Temp", names(dataFiles[[i]]))]
-    Fextrc <- str_extract(tempcolname, Temppat)
-    is_F <- substr(Fextrc, nchar(Fextrc),nchar(Fextrc))=="F"
-    if (is_F) {
-      dataFiles[[i]] <- dataFiles[[i]] %>% 
-        mutate(convert=(!!as.name(tempcolname) - 32) * 5/9 )
-      Cextrc <- str_replace(Fextrc,"F","C")
-      newcolname <- str_replace(tempcolname, Fextrc, Cextrc)
-      dataFiles[[i]] <- dataFiles[[i]][, !grepl("Temp", names(dataFiles[[i]]))]
-      names(dataFiles[[i]])[names(dataFiles[[i]])=="convert"] <- newcolname
-    }
-    dataFiles[[i]] <- dataFiles[[i]] %>% 
-      select(!!as.name(names(dataFiles[[i]])[1]), Date, !!as.name(timecol), if(is_F)newcolname else tempcolname, everything())
-  }
-  filepattern <- "\\S+?_"
-  locations <- c()
-  for (i in 1:length(dataFiles)){
-    locations <- c(locations,str_extract(basename(Sys.glob(glob.path)[i]),filepattern))
-  }
-  output <- list()
-  for (unique_location in unique(locations)){
-    tmp <- NULL
-    for (i in 1:length(locations)){
-      if(locations[i]==unique_location){
-        tmp <- bind_rows(tmp,dataFiles[[i]])
-      }
-    }
-    output[[unique_location]] <- tmp
-  }
-  dir.create("SpringData", showWarnings = F)
-  for (i in 1:length(output)){
-    filename <- paste0(substr(names(output)[i],1,nchar(names(output)[i])-1),".csv")
-    write_csv(output[[i]], file.path("SpringData",filename))
-  }
-}
-```
 Once the function has been sourced, it can be applied to numerous files/folders simply by inputting the name of the object of interest. In this case, the folder containing the spring .csv files is called CSV, so the function is applied to this folder. The next step is to run `SpringDat.R("CSV")` to apply the function to the folder containing the .csv files.
 
 This command will run and edit each file individually, then export them to a newly created folder titled "SpringData" that will show up within the working directory. The newly edited files that were collected from the same sample location (those that share the same unit serial number) will be consolidated into one large .csv file that lists the sample location as their name. This allows different files of the same location to be grouped together for easier file management.
 
-Th output of the command can be seen below, with the new _SpringData_ folder located in the working directory.
+The output of the command can be seen below, with the new _SpringData_ folder located in the working directory.
 
 ![Working Directory](Images/WorkingDirectory.png)
 
