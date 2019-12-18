@@ -43,8 +43,6 @@ install.packages("tidyverse")
 The next command, _library_, loads the tidyverse. The commands to install and load are broken up so that problems do not arise on the off-chance that the tidyverse is already installed but not loaded. Though this is an easy problem to fix, it isn't very noticeable and can cause larger issues down the road.  The next command is used to set _stringsAsFactors_ to 'false' so that the dataframe is not read as factor variables. The last line of code sets the CSV folder containing the .csv files as the path that will be used within the function. 
 ```
 library("tidyverse")
-options(stringsAsFactors = F)
-path <- "CSV"
 ```
 ## Running the Code
 
