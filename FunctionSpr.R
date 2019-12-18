@@ -2,7 +2,7 @@ SpringDat.R <- function(path) {
   #Applies the function to SpringDat.R
   glob.path <- paste0(path, "/*", ".csv")
   #Sets all of the .csv files in the path (CSV folder) to the name glob.path
-  dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T)
+  dataFiles <- lapply(Sys.glob(glob.path), read.csv, skip=1, header=T, stringsAsFactors=FALSE)
   #reads all of the files, skips the first row, and keeps header as true
   datepat <- "\\d{2}\\/\\d{2}\\/\\d{2}"
   #creates and names pattern to format date column
