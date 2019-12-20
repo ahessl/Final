@@ -1,4 +1,4 @@
-# How to Read and Edit .Hobo Files from the Same Type of Data Logger 
+# Read, Edit, Combine Hobo Files in R
 
 ## Table of contents
 * [Introduction](#Introduction)
@@ -17,8 +17,8 @@ For my project, the .csv files that were in need of some TLC were collections of
 
 My tasks for this project include:
 * Separate the "Date.Time" column into two independent columns
-* Convert Temperature columns from Fahrenheit to Celcius
-* Apend multiple files from the same sample location into one comprehensive file
+* Convert Temperature columns from Fahrenheit to Celcius, if needed
+* Append multiple files from the same sample location into one comprehensive file
 * Create a function so that the code can be run on all files at once
 * Create code that will output all new files into a new folder
 
@@ -151,6 +151,10 @@ The final portion of the function creates a new folder named "SpringData" where 
 }
 ```
 Congratulations! You have successfully taken control of your computer and cleaned up those .csv files! The best part is, you aren't even dreaming this time. 
+
+## Future Work 
+* How to reperesent missing time periods
+* Combining files from same loggers where the file name is slightly different (is logger id same?)
 
 ## Author
 
